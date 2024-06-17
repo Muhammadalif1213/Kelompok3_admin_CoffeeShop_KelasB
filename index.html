@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
 
@@ -27,130 +26,73 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index.html" style="color: white; font-size: 40px;"><b>BCoffee Admin Web</b></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="oi oi-menu"></span> Menu
-            </button>
-            <div class="collapse navbar-collapse" id="ftco-nav">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="checkLogin(event)">Managemen</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown04">
-                    <a href="#" class="dropdown-item" onclick="checkLogin(event, 'katalog.html')">Manage Produk</a>
-                  </div>
-                </li>
-                <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#registrasiModal" id="loginLink">Login</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#kelompokModal">Kelompok</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" onclick="logout()" id="logoutLink" style="display: none;">Logout</a></li>
-              </ul>
-            </div>
-          </div>
-    </nav>
+    
+  <style>
+    .modal-body .list-group-item:hover {
+    background-color:gainsboro; 
+    }
 
-      <!-- Registrasi Modal -->
-      <div class="modal fade" id="registrasiModal" tabindex="-1" role="dialog" aria-labelledby="registrasiModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content" style="background-color: black;">
-            <div class="modal-header">
-              <h5 class="modal-title" id="registrasiModalLabel">Login</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="registrasiForm">
-                <div class="form-group">
-                  <label for="registrasiEmail">Email address (admin@mail.com)</label>
-                  <input type="email" class="form-control" id="registrasiEmail" placeholder="text here" >
-                </div>
-                <div class="form-group">
-                  <label for="registrasiPassword">Password (123)</label>
-                  <input type="password" class="form-control" id="registrasiPassword" placeholder="text here">
-                </div>
-                <div class="form-group">
-                  <label for="registrasiConfirmPassword">Confirm Password</label>
-                  <input type="password" class="form-control" id="registrasiConfirmPassword" placeholder="text here">
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-              </form>
-            </div>
-          </div>
+    .menu-entry {
+    overflow: hidden; 
+    position: relative; 
+    border-radius: 10px; 
+    }
+
+    .menu-entry .img {
+    display: block;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+    }
+
+    .menu-entry .img:hover {
+    transform: scale(1.1); 
+    opacity: 0.8; 
+    }
+
+    .menu-entry .img::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); 
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    }
+
+    .menu-entry .img:hover::after {
+    opacity: 1;
+    }
+
+  </style>
+  
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="index.html"><b>BCoffee Admin Web</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="checkLogin(event, 'katalog.html')">Managemen</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a href="#" class="dropdown-item" onclick="checkLogin(event, 'katalog.html')">Manage Produk</a>
+              </div>
+            </li>
+            <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#registrasiModal" id="loginLink">Login</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#kelompokModal">Kelompok</a></li>
+            <li class="nav-item"><a href="#" class="nav-link" onclick="logout()" id="logoutLink" style="display: none;">Logout</a></li>
+          </ul>
         </div>
       </div>
-
-    <script>
-      // Cek apakah user sudah login
-      function isLoggedIn() {
-        return localStorage.getItem('loggedIn') === 'true';
-      }
-
-      // Fungsi untuk mengecek status login
-      function checkLogin(event, redirectUrl) {
-        if (!isLoggedIn()) {
-          event.preventDefault();
-          $('#registrasiModal').modal('show');
-        } else if (redirectUrl) {
-          window.location.href = redirectUrl;
-        }
-      }
-
-      // Fungsi untuk logout
-      function logout() {
-        localStorage.removeItem('loggedIn');
-        alert('Anda telah logout.');
-        updateLoginStatus();
-      }
-
-      // Fungsi untuk mengupdate tampilan login/logout
-      function updateLoginStatus() {
-        if (isLoggedIn()) {
-          document.getElementById('loginLink').style.display = 'none';
-          document.getElementById('logoutLink').style.display = 'block';
-        } else {
-          document.getElementById('loginLink').style.display = 'block';
-          document.getElementById('logoutLink').style.display = 'none';
-        }
-      }
-
-      // Form submission event listener
-      document.getElementById('registrasiForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        // Di sini Anda bisa menambahkan logika untuk menyimpan data pengguna dan mengautentikasi
-        localStorage.setItem('loggedIn', 'true');
-        $('#registrasiModal').modal('hide');
-        alert('Login berhasil! Anda sekarang sudah login.');
-        updateLoginStatus();
-      });
-
-      // Update status login saat halaman dimuat
-      document.addEventListener('DOMContentLoaded', function() {
-        updateLoginStatus();
-      });
-    </script>
-
-    <!-- Include JS files -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script src="js/scrollax.min.js"></script>
-    <script src="js/google-map.js"></script>
-    <script src="js/main.js"></script>
-  </body>
-</html>
-
+    </nav>
+    
 
 	  <!-- Kelompok Modal -->
 	<div class="modal fade" id="kelompokModal" tabindex="-1" role="dialog" aria-labelledby="kelompokModalLabel" aria-hidden="true">
@@ -178,69 +120,61 @@
     <!-- END nav -->
     <!-- Registrasi Modal -->
     <div class="modal fade" id="registrasiModal" tabindex="-1" role="dialog" aria-labelledby="registrasiModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background-color: black;">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="registrasiModalLabel">Login</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="registrasiForm">
-                        <div class="form-group">
-                            <label for="registrasiEmail">Email address</label>
-                            <input type="email" class="form-control" id="registrasiEmail" placeholder="text here" >
-                        </div>
-                        <div class="form-group">
-                            <label for="registrasiPassword">Password</label>
-                            <input type="password" class="form-control" id="registrasiPassword" placeholder="text here">
-                        </div>
-                        <div class="form-group">
-                            <label for="registrasiConfirmPassword">Confirm Password</label>
-                            <input type="password" class="form-control" id="registrasiConfirmPassword" placeholder="text here">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
-                </div>
-            </div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: black;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registrasiModalLabel">Login</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="registrasiForm">
+              <div class="form-group">
+                <label for="registrasiEmail">Email address</label>
+                <input type="email" class="form-control" id="registrasiEmail" placeholder="text here" required>
+              </div>
+              <div class="form-group">
+                <label for="registrasiPassword">Password</label>
+                <input type="password" class="form-control" id="registrasiPassword" placeholder="text here" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-
-      <div class="slider-item" style="background-image: url(images/bg_2.jpg);">
-      </div>
-
-      <div class="slider-item" style="background-image: url(images/bg_3.jpg);">
-      </div>
-    </section>
+    
+    <div class="vidio">
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/lAd3LYIZMjs?si=VtLmGlejbbTsN9-I&amp;start=00&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
 
     <section class="ftco-section">
     	<div class="container">
     		<div class="row align-items-center">
-    			</div>
-    			<div class="col-md-6">
+    			<div class="col-md-10">
     				<div class="row">
     					<div class="col-md-6">
-    						<div class="menu-entry">
-		    					<a href="#" class="img" style="background-image: url(images/menu-1.jpg);"></a>
+    						<div class="menu-entry" style="width: 100%; height: 200px;">
+		    					<div class="img" style="background-image: url(images/menu-1.jpg);"></div>
 		    				</div>
     					</div>
     					<div class="col-md-6">
-    						<div class="menu-entry mt-lg-4">
-		    					<a href="#" class="img" style="background-image: url(images/menu-2.jpg);"></a>
+    						<div class="menu-entry mt-lg-4" style="width: 100%; height: 200px;">
+		    					<div class="img" style="background-image: url(images/menu-2.jpg);"></div>
 		    				</div>
     					</div>
     					<div class="col-md-6">
-    						<div class="menu-entry">
-		    					<a href="#" class="img" style="background-image: url(images/menu-3.jpg);"></a>
+    						<div class="menu-entry" style="width: 100%; height: 200px;">
+		    					<div class="img" style="background-image: url(images/menu-3.jpg);"></div>
 		    				</div>
     					</div>
     					<div class="col-md-6">
-    						<div class="menu-entry mt-lg-4">
-		    					<a href="#" class="img" style="background-image: url(images/menu-4.jpg);"></a>
+    						<div class="menu-entry mt-lg-4" style="width: 100%; height: 200px;">
+		    					<div class="img" style="background-image: url(images/menu-4.jpg);"></div>
 		    				</div>
     					</div>
-    				</div>
+            </div>
     			</div>
     		</div>
     	</div>
@@ -257,7 +191,7 @@
 		              <div class="text">
 		              	<div class="icon"><span class="flaticon-coffee-cup"></span></div>
 		              	<strong class="number" data-number="100">0</strong>
-		              	<span>Coffee Branches</span>
+		              	<span>Cabang</span>
 		              </div>
 		            </div>
 		          </div>
@@ -266,7 +200,7 @@
 		              <div class="text">
 		              	<div class="icon"><span class="flaticon-coffee-cup"></span></div>
 		              	<strong class="number" data-number="85">0</strong>
-		              	<span>Number of Awards</span>
+		              	<span>Penghargaan</span>
 		              </div>
 		            </div>
 		          </div>
@@ -275,7 +209,7 @@
 		              <div class="text">
 		              	<div class="icon"><span class="flaticon-coffee-cup"></span></div>
 		              	<strong class="number" data-number="10567">0</strong>
-		              	<span>Happy Customer</span>
+		              	<span>Pembeli Happy</span>
 		              </div>
 		            </div>
 		          </div>
@@ -284,7 +218,7 @@
 		              <div class="text">
 		              	<div class="icon"><span class="flaticon-coffee-cup"></span></div>
 		              	<strong class="number" data-number="900">0</strong>
-		              	<span>Staff</span>
+		              	<span>Pegawai</span>
 		              </div>
 		            </div>
 		          </div>
@@ -299,9 +233,9 @@
 	    <div class="container">
 	      <div class="row justify-content-center mb-5">
 	        <div class="col-md-7 heading-section text-center ftco-animate">
-	        	<span class="subheading">Testimony</span>
-	          <h2 class="mb-4">Customers Says</h2>
-	          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+	        	<span class="subheading">Tanggapan</span>
+	          <h2 class="mb-4">Komentar Pembeli</h2>
+	          <p>Nikmati Kesegaran dan Kehangatan dalam Setiap Cangkir.</p>
 	        </div>
 	      </div>
 	    </div>
@@ -310,65 +244,50 @@
 	        <div class="col-lg align-self-sm-end ftco-animate">
 	          <div class="testimony">
 	             <blockquote>
-	                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small.&rdquo;</p>
+	                <p>&ldquo;Kopi Es nya enak dan menyegarkan jadi cocok juga diminum di sianh hari.&rdquo;</p>
 	              </blockquote>
 	              <div class="author d-flex mt-4">
-	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_1.jpg" alt="">
-	                </div>
-	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Surti<span class="position">Pegawai Kantor</span></div>
 	              </div>
 	          </div>
 	        </div>
 	        <div class="col-lg align-self-sm-end">
 	          <div class="testimony overlay">
 	             <blockquote>
-	                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.&rdquo;</p>
+	                <p>&ldquo; Mas-mas Baristanya good looking jadi betah ngopi. &rdquo;</p>
 	              </blockquote>
 	              <div class="author d-flex mt-4">
-	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_2.jpg" alt="">
-	                </div>
-	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Sullyoon<span class="position">Member NMIXX</span></div>
 	              </div>
 	          </div>
 	        </div>
 	        <div class="col-lg align-self-sm-end ftco-animate">
 	          <div class="testimony">
 	             <blockquote>
-	                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small  line of blind text by the name. &rdquo;</p>
+	                <p>&ldquo; Baristanya baik ramah penyajiannya juga baik. &rdquo;</p>
 	              </blockquote>
 	              <div class="author d-flex mt-4">
-	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_3.jpg" alt="">
-	                </div>
-	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Alipian<span class="position">Mahasiswa UMY</span></div>
 	              </div>
 	          </div>
 	        </div>
 	        <div class="col-lg align-self-sm-end">
 	          <div class="testimony overlay">
 	             <blockquote>
-	                <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however.&rdquo;</p>
+	                <p>&ldquo; Kopi enak sangat terasa sehingga saya dapat mengerjakan tugas kuliah 24 jam tanpa kantuk.&rdquo;</p>
 	              </blockquote>
 	              <div class="author d-flex mt-4">
-	                <div class="image mr-3 align-self-center">
-	                  <img src="images/person_2.jpg" alt="">
-	                </div>
-	                <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	                <div class="name align-self-center">Bimo Bimbim<span class="position">Mahasiswa UMY</span></div>
 	              </div>
 	          </div>
 	        </div>
 	        <div class="col-lg align-self-sm-end ftco-animate">
 	          <div class="testimony">
 	            <blockquote>
-	              <p>&ldquo;Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small  line of blind text by the name. &rdquo;</p>
+	              <p>&ldquo; Kopi yang disajikan sangat enak dan menyegarkan sehingga menjadi lebih semangat untuk bekerja. &rdquo;</p>
 	            </blockquote>
 	            <div class="author d-flex mt-4">
-	              <div class="image mr-3 align-self-center">
-	                <img src="images/person_3.jpg" alt="">
-	              </div>
-	              <div class="name align-self-center">Louise Kelly <span class="position">Illustrator Designer</span></div>
+	              <div class="name align-self-center">Giga <span class="position">Pegawai UMY</span></div>
 	            </div>
 	          </div>
 	        </div>
@@ -389,8 +308,8 @@
         <div class="row mb-5">
           <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">About Us</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <h2 class="ftco-heading-2">BCoffee</h2>
+              <p>Nikmati Kesegaran dan Kehangatan dalam Setiap Cangkir.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -411,12 +330,12 @@
           </div>
           <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
             <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<h2 class="ftco-heading-2">Alamat</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Jl. Brawijaya, Geblagan, Tamantirto, Kec. Kasihan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55183</span></li>
+	                <li><a href="https://wa.me/+6287870133425"><span class="icon icon-phone"></span><span class="text">+62 878-7013-3425</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">bcoffee@umy.ac.id</span></a></li>
 	              </ul>
 	            </div>
             </div>
@@ -432,9 +351,6 @@
         </div>
       </div>
     </footer>
-    
-  
-
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
@@ -456,18 +372,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-
-  <script>
-    $(document).ready(function() {
-      // Show the registration modal when the link is clicked
-      $('.nav-link').on('click', function(e) {
-        if ($(this).text().trim() === 'Registrasi') {
-          e.preventDefault();
-          $('#registrasiModal').modal('show');
-        }
-      });
-    });
-  </script>
+  <script src="js/login-logout.js"></script>
     
   </body>
 </html>

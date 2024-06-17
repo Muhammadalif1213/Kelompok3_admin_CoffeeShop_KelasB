@@ -1,0 +1,23 @@
+.table {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.table thead th {
+    background-color: #ad8c3d;
+    color: #fff;
+    border-color: #ad8c3d;
+}
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.table-bordered th, .table-bordered td {
+    border-color: #dee2e6;
+}
+.table-bordered th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+.table-bordered td {
+    vertical-align: middle;
+}
